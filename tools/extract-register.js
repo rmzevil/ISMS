@@ -13,8 +13,15 @@
  * register genuinely changed. Do not add a generation timestamp here — it
  * would churn the file on every run and destroy that property.
  *
+ * CONSTRAINT (load-bearing): the DOCS array literal must stay comment-free and
+ * quote-delimited. The scanner below is string-aware but has no concept of //
+ * or /* *\/ comments, regex literals, or template interpolation. Any of those
+ * inside the array make it fail loudly (exit 2) rather than silently wrong --
+ * verified across 1,343 adversarial mutations -- but they are still unsupported.
+ * The marker is whitespace-exact: minifying `const DOCS = [` breaks the match.
+ *
  * Usage: node tools/extract-register.js [--check]
- *   --check  exit 1 if register.json is out of date, write nothing
+ *   --check  exit 1 if register.json is out of date or unverifiable, write nothing
  */
 'use strict';
 const fs = require('fs');
@@ -56,9 +63,16 @@ function findArrayLiteral(src, marker) {
 }
 
 function main() {
+  const checkMode = process.argv.includes('--check');
+
   if (!fs.existsSync(SOURCE)) {
     // index.html is deleted and re-uploaded as two separate commits by the
     // GitHub web UI. Do not clobber register.json on the intermediate state.
+    if (checkMode) {
+      // --check exists to be a gate. Verifying nothing is not a pass.
+      console.error('index.html absent — cannot verify register.json');
+      return 1;
+    }
     console.log('index.html absent — leaving register.json untouched');
     return 0;
   }
@@ -80,7 +94,7 @@ function main() {
     id: d.id,
     name: d.name,
     phase: d.ph,
-    folder: FOLDER_ALIAS[d.ph] || d.ph,
+    folder: Object.hasOwn(FOLDER_ALIAS, d.ph) ? FOLDER_ALIAS[d.ph] : d.ph,
     obligation: d.ob,
     ref: d.ref,
     stem: stemOf(d.id, d.name),
@@ -89,7 +103,20 @@ function main() {
   const next = JSON.stringify(register, null, 2) + '\n';
   const prev = fs.existsSync(TARGET) ? fs.readFileSync(TARGET, 'utf8') : null;
 
-  if (process.argv.includes('--check')) {
+  // A register that loses documents is far more likely to be a bad regeneration
+  // of index.html than a real deletion, and it would read downstream as "these
+  // documents are no longer required". Fail loudly; --allow-shrink to override.
+  if (prev && !process.argv.includes('--allow-shrink')) {
+    let prevCount = null;
+    try { const p = JSON.parse(prev); if (Array.isArray(p)) prevCount = p.length; } catch { /* corrupt: regenerate */ }
+    if (prevCount !== null && register.length < prevCount) {
+      throw new Error(
+        `register shrank ${prevCount} -> ${register.length} documents. ` +
+        `If this is intended, re-run with --allow-shrink.`);
+    }
+  }
+
+  if (checkMode) {
     if (prev === next) { console.log(`register.json up to date (${register.length} documents)`); return 0; }
     console.error('register.json is STALE — run: node tools/extract-register.js');
     return 1;

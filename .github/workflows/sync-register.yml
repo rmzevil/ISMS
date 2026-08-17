@@ -10,7 +10,15 @@ name: Sync register.json
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'tools/extract-register.js', '.github/workflows/sync-register.yml']
+    # register.json is included so that a hand-edited or corrupted copy is
+    # repaired on the next push rather than sitting wrong until index.html
+    # happens to change. This cannot loop: pushes made with GITHUB_TOKEN do
+    # not trigger workflow runs.
+    paths:
+      - 'index.html'
+      - 'register.json'
+      - 'tools/extract-register.js'
+      - '.github/workflows/sync-register.yml'
   workflow_dispatch:
 
 permissions:
@@ -38,7 +46,10 @@ jobs:
           # Stage first, then test the index. "git diff" alone compares only
           # tracked files, so a regenerated-from-absent register.json would be
           # untracked and silently skipped.
-          git add -A -- register.json
+          # "|| true": with both index.html and register.json absent the
+          # pathspec matches nothing and git exits 128, which would fail the
+          # job for a state that is correctly a no-op.
+          git add -A -- register.json || true
           if git diff --cached --quiet -- register.json; then
             echo "register.json unchanged — nothing to commit"
             exit 0
@@ -46,4 +57,8 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: regenerate register.json from index.html"
+          # Rebase before pushing: the owner uploads index.html as two commits
+          # (delete, then add), so a second push can land while this job runs
+          # and a plain push would be rejected non-fast-forward.
+          git pull --rebase origin main
           git push
