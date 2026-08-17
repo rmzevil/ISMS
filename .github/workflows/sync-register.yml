@@ -1,0 +1,46 @@
+name: Sync register.json
+
+# The Documented Information Register is hardcoded in index.html. This keeps a
+# small, machine-readable copy published at /register.json so external tooling
+# can read the register without downloading and parsing the whole 700 KB app.
+#
+# Requires: Settings -> Actions -> General -> Workflow permissions
+#           set to "Read and write permissions".
+
+on:
+  push:
+    branches: [main]
+    paths: ['index.html', 'tools/extract-register.js', '.github/workflows/sync-register.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-register
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate register.json
+        run: node tools/extract-register.js
+
+      - name: Commit if the register changed
+        run: |
+          if git diff --quiet -- register.json; then
+            echo "register.json unchanged — nothing to commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add register.json
+          git commit -m "chore: regenerate register.json from index.html"
+          git push
