@@ -35,12 +35,15 @@ jobs:
 
       - name: Commit if the register changed
         run: |
-          if git diff --quiet -- register.json; then
+          # Stage first, then test the index. "git diff" alone compares only
+          # tracked files, so a regenerated-from-absent register.json would be
+          # untracked and silently skipped.
+          git add -A -- register.json
+          if git diff --cached --quiet -- register.json; then
             echo "register.json unchanged — nothing to commit"
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add register.json
           git commit -m "chore: regenerate register.json from index.html"
           git push
