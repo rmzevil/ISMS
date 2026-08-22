@@ -31,7 +31,7 @@
     "name": "Interested parties register",
     "phase": "Context",
     "folder": "Context",
-    "obligation": "Mandatory",
+    "obligation": "Useful",
     "ref": "4.2",
     "stem": "D-04_Interested-parties-register"
   },
@@ -85,7 +85,7 @@
     "name": "Roles and responsibilities charter",
     "phase": "Leadership",
     "folder": "Leadership",
-    "obligation": "Mandatory",
+    "obligation": "Useful",
     "ref": "5.3",
     "stem": "D-10_Roles-and-responsibilities-charter"
   },
@@ -202,7 +202,7 @@
     "name": "Training and awareness log",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Mandatory",
+    "obligation": "Useful",
     "ref": "7.2 / 7.3 / A.6.3",
     "stem": "D-23_Training-and-awareness-log"
   },
@@ -211,7 +211,7 @@
     "name": "Communication plan",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Mandatory",
+    "obligation": "Useful",
     "ref": "7.4",
     "stem": "D-24_Communication-plan"
   },
@@ -238,7 +238,7 @@
     "name": "Change control log",
     "phase": "Operation",
     "folder": "Operations",
-    "obligation": "Mandatory",
+    "obligation": "Conditional",
     "ref": "8.1 / A.8.32",
     "stem": "D-27_Change-control-log"
   },
