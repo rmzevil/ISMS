@@ -4,7 +4,7 @@
     "name": "Business case for ISO 27001",
     "phase": "Initiation",
     "folder": "Initiation",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "Pre-project",
     "stem": "D-01_Business-case-for-ISO-27001"
   },
@@ -13,7 +13,7 @@
     "name": "Project initiation document (PID)",
     "phase": "Initiation",
     "folder": "Initiation",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "Pre-project / 5.1",
     "stem": "D-02_Project-initiation-document-PID-"
   },
@@ -31,7 +31,7 @@
     "name": "Interested parties register",
     "phase": "Context",
     "folder": "Context",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "4.2",
     "stem": "D-04_Interested-parties-register"
   },
@@ -40,7 +40,7 @@
     "name": "SWOT analysis record",
     "phase": "Context",
     "folder": "Context",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "4.1",
     "stem": "D-05_SWOT-analysis-record"
   },
@@ -49,7 +49,7 @@
     "name": "Legal, regulatory and contractual compliance matrix",
     "phase": "Context",
     "folder": "Context",
-    "obligation": "Conditional",
+    "obligation": "Optional",
     "ref": "4.2 / A.5.31",
     "stem": "D-06_Legal-regulatory-and-contractual-compliance-matrix"
   },
@@ -58,7 +58,7 @@
     "name": "Gap assessment checklist (clauses 4-10)",
     "phase": "Gap assessment",
     "folder": "Gap Assessment",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "4-10",
     "stem": "D-07_Gap-assessment-checklist-clauses-4-10-"
   },
@@ -67,7 +67,7 @@
     "name": "Gap analysis report",
     "phase": "Gap assessment",
     "folder": "Gap Assessment",
-    "obligation": "Mandatory",
+    "obligation": "Optional",
     "ref": "4-10",
     "stem": "D-08_Gap-analysis-report"
   },
@@ -85,7 +85,7 @@
     "name": "Roles and responsibilities charter",
     "phase": "Leadership",
     "folder": "Leadership",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "5.3",
     "stem": "D-10_Roles-and-responsibilities-charter"
   },
@@ -94,7 +94,7 @@
     "name": "Management commitment and approval record",
     "phase": "Leadership",
     "folder": "Leadership",
-    "obligation": "Mandatory",
+    "obligation": "Optional",
     "ref": "5.1",
     "stem": "D-11_Management-commitment-and-approval-record"
   },
@@ -103,7 +103,7 @@
     "name": "ISMS manual",
     "phase": "Leadership",
     "folder": "Leadership",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "4-10",
     "stem": "D-12_ISMS-manual"
   },
@@ -175,7 +175,7 @@
     "name": "Policy suite summary",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "5.2 / 7.5",
     "stem": "D-20_Policy-suite-summary"
   },
@@ -184,7 +184,7 @@
     "name": "Resource allocation document",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Mandatory",
+    "obligation": "Optional",
     "ref": "7.1",
     "stem": "D-21_Resource-allocation-document"
   },
@@ -202,7 +202,7 @@
     "name": "Training and awareness log",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "7.2 / 7.3 / A.6.3",
     "stem": "D-23_Training-and-awareness-log"
   },
@@ -211,7 +211,7 @@
     "name": "Communication plan",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "7.4",
     "stem": "D-24_Communication-plan"
   },
@@ -220,7 +220,7 @@
     "name": "Documented information log",
     "phase": "SoA and support",
     "folder": "SoA and Support",
-    "obligation": "Mandatory",
+    "obligation": "Optional",
     "ref": "7.5",
     "stem": "D-25_Documented-information-log"
   },
@@ -238,7 +238,7 @@
     "name": "Change control log",
     "phase": "Operation",
     "folder": "Operations",
-    "obligation": "Conditional",
+    "obligation": "Optional",
     "ref": "8.1 / A.8.32",
     "stem": "D-27_Change-control-log"
   },
@@ -247,7 +247,7 @@
     "name": "Supplier evaluation and control register",
     "phase": "Operation",
     "folder": "Operations",
-    "obligation": "Conditional",
+    "obligation": "Optional",
     "ref": "8.1 / A.5.19 - A.5.23",
     "stem": "D-28_Supplier-evaluation-and-control-register"
   },
@@ -310,7 +310,7 @@
     "name": "ISMS improvement log",
     "phase": "Improvement",
     "folder": "Improvement",
-    "obligation": "Mandatory",
+    "obligation": "Optional",
     "ref": "10.1",
     "stem": "D-35_ISMS-improvement-log"
   },
@@ -319,7 +319,7 @@
     "name": "Certification audit readiness checklist",
     "phase": "Certification",
     "folder": "Certification",
-    "obligation": "Useful",
+    "obligation": "Optional",
     "ref": "4-10",
     "stem": "D-36_Certification-audit-readiness-checklist"
   }
